@@ -17,9 +17,9 @@ My local development postgres db has no password to access it, so if your postgr
 
 <property name="eclipselink.jdbc.url" value="jdbc:postgresql://localhost:5432/MANY_TO_MANY_UNIDIRECTIONAL_EXAMPLE" />
 
-<property name="javax.persistence.jdbc.user" value="postgres" />
+			<property name="javax.persistence.jdbc.user" value="postgres" />
 						
-<property name="javax.persistence.jdbc.password" value="" />
+			<property name="javax.persistence.jdbc.password" value="" />
 
 
 

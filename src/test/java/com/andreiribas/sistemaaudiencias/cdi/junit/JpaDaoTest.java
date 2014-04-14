@@ -1,3 +1,27 @@
+/** 
+The MIT License (MIT)
+
+Copyright (c) 2013 Andrei Gonçalves Ribas <andrei.g.ribas@gmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
+
 /**
  * 
  */
@@ -5,7 +29,6 @@ package com.andreiribas.sistemaaudiencias.cdi.junit;
 
 import java.io.Serializable;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -19,44 +42,7 @@ import com.andreiribas.sistemaaudiencias.model.AbstractEntity;
  * @author Andrei Gonçalves Ribas <andrei.g.ribas@gmail.com>
  * 
  */
-public abstract class JpaDaoTest<T extends GenericDao<U, ? extends Serializable>, U extends AbstractEntity<? extends Serializable>> {
-	
-	@Inject
-	//private EntityManager entityManager;
-	
-	//private EntityTransaction transaction;
-	
-	//private Map<T, EntityManager> entityManagerMap;
-	
-	/*
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Before
-	public void setUp() {
-		
-		this.entityManagerMap = new HashMap();
-		
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		
-		entityTransaction.begin();
-		
-		for(String nativeQuery: this.getNativeQueries()) {
-			entityManager.createNativeQuery(nativeQuery).executeUpdate();
-		}
-		
-		for(Class<? extends AbstractEntity<? extends Serializable>> modelClass: this.getModelClasses()) {
-			
-			String entityName = modelClass.getSimpleName();
-			
-			String deleteQuery = String.format("delete from %s", entityName);
-			
-			entityManager.createQuery(deleteQuery).executeUpdate();
-			
-		}
-		
-		entityTransaction.commit();
-		
-	}
-	*/
+public abstract class JpaDaoTest<T extends GenericDao<? extends AbstractEntity<? extends Serializable>, ? extends Serializable>, U extends AbstractEntity<? extends Serializable>> {
 	
 	@Before
 	public void setUp() {
@@ -107,17 +93,7 @@ public abstract class JpaDaoTest<T extends GenericDao<U, ? extends Serializable>
 	}
 	
 	protected abstract U getDefaulModelInstanceForInsertion();
-	
-	/*
-	protected void setUpNewTransaction() {
 		
-		this.transaction = this.getDaoInstance().getEntityManager().getTransaction();
-		
-		this.transaction.begin();
-	
-	}
-	*/
-	
 	protected EntityTransaction setUpNewTransaction(EntityManager entityManager) {
 		
 		EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -131,56 +107,6 @@ public abstract class JpaDaoTest<T extends GenericDao<U, ? extends Serializable>
 		return entityTransaction;
 		
 	}
-	
-	/*
-	protected EntityTransaction setUpNewTransaction(T genericDao) {
-		
-		if(!entityManagerMap.containsKey(genericDao)) {
-			
-			EntityManager em = genericDao.getEntityManager();
-			
-			entityManagerMap.put(genericDao, em);
-			
-		}
-		
-		EntityTransaction entityTransaction = entityManagerMap.get(genericDao).getTransaction();
-		
-		entityTransaction.begin();
-		
-		return entityTransaction;
-		
-	}
-	*/
-	
-	/*
-	protected void commitTransaction() {
-		
-		entityManager.flush();
-		
-		entityManager.clear();
-		
-		this.transaction.commit();
-	
-	}
-	*/
-	
-	/*
-	protected void commitTransaction(T genericDao) {
-		
-		if(!entityManagerMap.containsKey(genericDao)) {
-			throw new IllegalStateException("The developer should have called the setUpNewTransaction(T genericDao) method vefore calling this method.");
-		}
-		
-		EntityManager em = entityManagerMap.get(genericDao);
-		
-		em.flush();
-		
-		em.clear();
-		
-		em.getTransaction().commit();
-	
-	}
-	*/
 	
 	protected void commitTransaction(EntityManager entityManager) {
 		
