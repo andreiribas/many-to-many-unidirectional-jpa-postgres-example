@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+	version="2.1">
+
+	<persistence-unit name="MANY_TO_MANY_UNIDIRECTIONAL_EXAMPLE" transaction-type="RESOURCE_LOCAL">
+
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+				
+		<class>com.andreiribas.sistemaaudiencias.model.accesscontrol.User</class>
+		
+		<class>com.andreiribas.sistemaaudiencias.model.accesscontrol.Group</class>
+
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+		<properties>
+
+			<property name="eclipselink.jdbc.driver" value="org.postgresql.Driver" />
+            
+            <property name="eclipselink.jdbc.url"
+                value="jdbc:postgresql://localhost:5432/MANY_TO_MANY_UNIDIRECTIONAL_EXAMPLE" />
+
+			<property name="javax.persistence.jdbc.user" value="postgres" />
+
+			<property name="eclipselink.target-database"
+				value="org.eclipse.persistence.platform.database.PostgreSQLPlatform" />
+
+			<property name="eclipselink.logging.level" value="fine" />
+
+			<property name="eclipselink.logging.level.sql" value="FINEST" />
+
+			<property name="eclipselink.logging.parameters" value="true" />
+			
+			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
+			
+			<property name="eclipselink.create-ddl-jdbc-file-name" value="createDDL_ddlGeneration.jdbc"/>
+            
+            <property name="eclipselink.drop-ddl-jdbc-file-name" value="dropDDL_ddlGeneration.jdbc"/>
+            
+            <property name="eclipselink.ddl-generation.output-mode" value="both"/>
+
+		</properties>
+
+	</persistence-unit>
+
+</persistence>
